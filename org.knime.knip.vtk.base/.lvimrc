@@ -1,0 +1,14 @@
+" insert the files of the main branch for easy lookup
+set path+=~/Informatik/knip/org.knime.knip.base/src
+set path+=~/Informatik/knip/org.knime.knip.core/src
+set path+=~/Informatik/knip/org.knime.knip.view3d.base/src
+
+" break at 80 characters
+set textwidth=80
+
+" allow for quick Checkstyle
+nmap <Leader>q :Checkstyle<CR>
+
+" use this as working dir
+cd ~/Informatik/knip/
+:CommandTFlush

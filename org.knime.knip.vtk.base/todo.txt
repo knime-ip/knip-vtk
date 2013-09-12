@@ -1,0 +1,27 @@
+Bugs to fix:
+
+    PreRender end (x502) Invalid Operation
+    Is an opengl bug, coming from the vktOpenGlGPUVolumeRayCastMapper. Seems
+    that there is some operation performed that should not be! Vanishes if one
+    comments out the line removing the volumes from the Renderer. So far only
+    seen in Kubuntu.
+    One can force the bug to appear by using the GPU instead of the SMART Mapper
+    in the Volume.java class.
+    happens if a prop is removed and then later readded to the view
+    test: see if this also happens if we do not destroy the opengl context
+
+    on windows only:
+    image is rendered correctly on init, but then overdrawn by some higher call
+    from SWING with background color. Questing asked on lwjgl forums.
+
+
+Features still missing:
+
+    move multiple tfs at once
+    overview of image dims etc, as in Table Cell Viewer
+    add the camera icon to the screenshots
+
+    more efficient reading from the arrays
+
+Request:
+    

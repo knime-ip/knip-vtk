@@ -1,0 +1,58 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: VTK 5.8.0 Libraries for Windows x86_64
+Bundle-SymbolicName: org.knime.knip.vtk.bin.windows.x86_64
+Bundle-Version: 1.1.0.qualifier
+Bundle-Vendor: University of Konstanz
+Fragment-Host: org.knime.knip.vtk.base;bundle-version="1.1.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Eclipse-PlatformFilter: (&(osgi.os=win32)(osgi.arch=x86_64))
+Bundle-NativeCode: 
+ lib/windows/x86_64/msvcp100.dll;
+ lib/windows/x86_64/msvcr100.dll;
+ lib/windows/x86_64/vtkalglib.dll;
+ lib/windows/x86_64/vtkCommon.dll;
+ lib/windows/x86_64/vtkCommonJava.dll;
+ lib/windows/x86_64/vtkDICOMParser.dll;
+ lib/windows/x86_64/vtkexoIIc.dll;
+ lib/windows/x86_64/vtkexpat.dll;
+ lib/windows/x86_64/vtkFiltering.dll;
+ lib/windows/x86_64/vtkFilteringJava.dll;
+ lib/windows/x86_64/vtkfreetype.dll;
+ lib/windows/x86_64/vtkftgl.dll;
+ lib/windows/x86_64/vtkGenericFiltering.dll;
+ lib/windows/x86_64/vtkGenericFilteringJava.dll;
+ lib/windows/x86_64/vtkGraphics.dll;
+ lib/windows/x86_64/vtkGraphicsJava.dll;
+ lib/windows/x86_64/vtkhdf5.dll;
+ lib/windows/x86_64/vtkHybrid.dll;
+ lib/windows/x86_64/vtkHybridJava.dll;
+ lib/windows/x86_64/vtkImaging.dll;
+ lib/windows/x86_64/vtkImagingJava.dll;
+ lib/windows/x86_64/vtkInfovis.dll;
+ lib/windows/x86_64/vtkInfovisJava.dll;
+ lib/windows/x86_64/vtkIO.dll;
+ lib/windows/x86_64/vtkIOJava.dll;
+ lib/windows/x86_64/vtkjpeg.dll;
+ lib/windows/x86_64/vtklibxml2.dll;
+ lib/windows/x86_64/vtkmetaio.dll;
+ lib/windows/x86_64/vtkNetCDF_cxx.dll;
+ lib/windows/x86_64/vtkNetCDF.dll;
+ lib/windows/x86_64/vtkpng.dll;
+ lib/windows/x86_64/vtkproj4.dll;
+ lib/windows/x86_64/vtkRendering.dll;
+ lib/windows/x86_64/vtkRenderingJava.dll;
+ lib/windows/x86_64/vtksys.dll;
+ lib/windows/x86_64/vtktiff.dll;
+ lib/windows/x86_64/vtkverdict.dll;
+ lib/windows/x86_64/vtkVolumeRendering.dll;
+ lib/windows/x86_64/vtkVolumeRenderingJava.dll;
+ lib/windows/x86_64/vtkWidgets.dll;
+ lib/windows/x86_64/vtkWidgetsJava.dll;
+ lib/windows/x86_64/vtkzlib.dll;
+ lib/windows/x86_64/lwjgl.dll;
+ osname=win32;
+ osname=Windows 8;
+ osname=Windows8;
+ osname=Win 8;
+ processor=x86_64
