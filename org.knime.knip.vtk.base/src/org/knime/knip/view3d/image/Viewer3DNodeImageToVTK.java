@@ -76,10 +76,10 @@ import vtk.vtkTypeInt16Array;
 
 /**
  * This class is used to transfer data from imglib2 to the vtkImageData format.
- * 
+ *
  * The class stores the created vtkImages for quick access, which can be identified given the three dimensions.
- * 
- * 
+ *
+ *
  * @param <T>
  * @author <a href="mailto:dietzc85@googlemail.com">Christian Dietz</a>
  * @author <a href="mailto:horn_martin@gmx.de">Martin Horn</a>
@@ -108,7 +108,7 @@ public class Viewer3DNodeImageToVTK<T extends RealType<T>> {
 
     /**
      * Set up a new converter for the given ImgPlusValue.
-     * 
+     *
      * @param image the image to convert
      * @param caching wheter or not to use caching
      * @param eventService the eventService to use
@@ -160,9 +160,9 @@ public class Viewer3DNodeImageToVTK<T extends RealType<T>> {
 
     /**
      * Get vtkImageData for some dimensions.
-     * 
+     *
      * @param volume the volume to extract
-     * 
+     *
      * @return the vtkImageData
      */
     public final vtkImageData getVTKImageData(final Viewer3DNodeAxes.Volume volume) {
@@ -194,14 +194,14 @@ public class Viewer3DNodeImageToVTK<T extends RealType<T>> {
             // double spacingZ = 1.0;
 
             final double spacingX =
-                    ((m_image.calibration(x) <= 0.0) || Double.isNaN(m_image.calibration(x))) ? 1.0 : m_image
-                            .calibration(x);
+                    ((m_image.averageScale(x) <= 0.0) || Double.isNaN(m_image.averageScale(x))) ? 1.0 : m_image
+                            .averageScale(x);
             final double spacingY =
-                    ((m_image.calibration(y) <= 0.0) || Double.isNaN(m_image.calibration(y))) ? 1.0 : m_image
-                            .calibration(y);
+                    ((m_image.averageScale(y) <= 0.0) || Double.isNaN(m_image.averageScale(y))) ? 1.0 : m_image
+                            .averageScale(y);
             final double spacingZ =
-                    ((m_image.calibration(z) <= 0.0) || Double.isNaN(m_image.calibration(z))) ? 1.0 : m_image
-                            .calibration(z);
+                    ((m_image.averageScale(z) <= 0.0) || Double.isNaN(m_image.averageScale(z))) ? 1.0 : m_image
+                            .averageScale(z);
 
             // Set up the vtkImageData
             final vtkImageData image = new vtkImageData();
@@ -227,7 +227,7 @@ public class Viewer3DNodeImageToVTK<T extends RealType<T>> {
 
     /**
      * This method builds the array that holds the image data.
-     * 
+     *
      * @param volume the volume to extract
      * @return the data in form of a vtkDataArray
      */
@@ -310,7 +310,7 @@ public class Viewer3DNodeImageToVTK<T extends RealType<T>> {
 
     /**
      * Determines if this instance is caching.
-     * 
+     *
      * @return The caching.
      */
     public final boolean isCaching() {
@@ -319,7 +319,7 @@ public class Viewer3DNodeImageToVTK<T extends RealType<T>> {
 
     /**
      * Sets whether or not this instance is caching.
-     * 
+     *
      * @param caching The caching.
      */
     public final void setCaching(final boolean caching) {
@@ -340,7 +340,7 @@ public class Viewer3DNodeImageToVTK<T extends RealType<T>> {
 
     /**
      * Get the minimal number of dims an image needs to have so that it can be handled by this class.
-     * 
+     *
      * @return mindims
      */
     public static final int getMinDims() {
