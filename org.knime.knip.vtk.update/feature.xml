@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.knime.knip.vtk.update"
-      label="KNIP Update Site"
+      label="KNIME VTK Integration Update Site"
       version="1.1.0.qualifier">
 
    <includes
