@@ -50,4 +50,5 @@ Bundle-NativeCode:
  lib/osx/x86_64/libvtkzlib.jnilib;
  lib/osx/x86_64/liblwjgl.jnilib;
  osname=macosx;
+ osname=Mac OS X;
  processor=x86_64
