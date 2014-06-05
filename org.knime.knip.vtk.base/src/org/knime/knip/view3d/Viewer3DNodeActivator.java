@@ -71,7 +71,7 @@ public class Viewer3DNodeActivator extends NativeLibBundleActivator {
      * Default
      */
     public Viewer3DNodeActivator() {
-        super("org.knime.knip.vtk");
+        super("org.knime.knip.vtk", false);
 
         addConfig(new WindowsSystemLibraryConfig(WINDOWS));
         addConfig(new MacOSXSystemLibraryConfig(OSX));
@@ -136,7 +136,7 @@ public class Viewer3DNodeActivator extends NativeLibBundleActivator {
             "vtkInfovisJava"};
 
     /**
-     * @return
+     * @return true, if VTK was loaded successfully
      */
     public static boolean VTKLoaded() {
         return loaded;
