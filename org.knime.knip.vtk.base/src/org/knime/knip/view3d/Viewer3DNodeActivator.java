@@ -64,6 +64,9 @@ import org.osgi.framework.BundleContext;
  */
 public class Viewer3DNodeActivator extends NativeLibBundleActivator {
 
+    // we assume the activator to be a singleton
+    private static boolean loaded = false;
+
     /**
      * Default
      */
@@ -83,6 +86,8 @@ public class Viewer3DNodeActivator extends NativeLibBundleActivator {
         if (!GraphicsEnvironment.isHeadless()) {
             super.start(context);
         }
+
+        loaded = true;
     }
 
     /**
@@ -129,5 +134,12 @@ public class Viewer3DNodeActivator extends NativeLibBundleActivator {
             "vtkGenericFiltering", "vtkRendering", "vtkRenderingJava", "vtkexoIIc", "vtkHybrid", "vtkHybridJava",
             "vtkVolumeRendering", "vtkVolumeRenderingJava", "vtkWidgets", "vtkWidgetsJava", "vtkInfovis",
             "vtkInfovisJava"};
+
+    /**
+     * @return
+     */
+    public static boolean VTKLoaded() {
+        return loaded;
+    }
 
 }
