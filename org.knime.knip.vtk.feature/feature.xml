@@ -743,7 +743,7 @@ propagated with or for interoperation with KNIME.
          fragment="true"/>
 
    <plugin
-         id="org.knime.knip.vtk.bin.linux.x86_64"
+         id="org.knime.knip.vtk.bin.linux.amd64"
          os="linux"
          arch="x86_64"
          download-size="0"
@@ -752,7 +752,7 @@ propagated with or for interoperation with KNIME.
          fragment="true"/>
 
    <plugin
-         id="org.knime.knip.vtk.bin.macosx.x86_64"
+         id="org.knime.knip.vtk.bin.macosx.amd64"
          os="macosx"
          arch="x86_64"
          download-size="0"
@@ -770,7 +770,7 @@ propagated with or for interoperation with KNIME.
          fragment="true"/>
 
    <plugin
-         id="org.knime.knip.vtk.bin.windows.x86_64"
+         id="org.knime.knip.vtk.bin.windows.amd64"
          os="win32"
          arch="x86_64"
          download-size="0"
