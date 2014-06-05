@@ -50,29 +50,63 @@ package org.knime.knip.view3d;
 
 import java.awt.GraphicsEnvironment;
 
-import org.knime.core.node.NodeLogger;
-import org.osgi.framework.BundleActivator;
+import org.knime.knip.base.activators.LinuxSystemLibraryConfig;
+import org.knime.knip.base.activators.MacOSXSystemLibraryConfig;
+import org.knime.knip.base.activators.NativeLibBundleActivator;
+import org.knime.knip.base.activators.WindowsSystemLibraryConfig;
 import org.osgi.framework.BundleContext;
 
 /**
  * This class must be called before the first rendering is done, as it loads all the vtk libs.
- * 
+ *
  * @author <a href="mailto:dietzc85@googlemail.com">Christian Dietz</a>
- * @author <a href="mailto:horn_martin@gmx.de">Martin Horn</a>
- * @author <a href="mailto:michael.zinsmaier@googlemail.com">Michael Zinsmaier</a>
  * @author Clemens Müthing (clemens.muething@uni-konstanz.de)
  */
-public class Viewer3DNodeActivator implements BundleActivator {
+public class Viewer3DNodeActivator extends NativeLibBundleActivator {
 
-    private static final NodeLogger LOGGER = NodeLogger.getLogger("View3D");
+    /**
+     * Default
+     */
+    public Viewer3DNodeActivator() {
+        super("org.knime.knip.vtk");
 
-    private static boolean VTKLoaded = false;
+        addConfig(new WindowsSystemLibraryConfig(WINDOWS));
+        addConfig(new MacOSXSystemLibraryConfig(OSX));
+        addConfig(new LinuxSystemLibraryConfig(LINUX));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void start(final BundleContext context) throws Exception {
+        if (!GraphicsEnvironment.isHeadless()) {
+            super.start(context);
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void init() {
+        java.awt.Toolkit.getDefaultToolkit();
+        System.loadLibrary("jawt");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void load(final String lib) {
+        System.loadLibrary(lib);
+    }
 
     /*
      * The system specific files These are in order of their dependencies, SO DO
      * NOT TOUCH THEM!
      */
-    private static String[] linux = {"lwjgl", "vtkproj4", "vtkalglib", "vtksys", "vtkCommon", "vtkCommonJava",
+    private static String[] LINUX = {"lwjgl", "vtkproj4", "vtkalglib", "vtksys", "vtkCommon", "vtkCommonJava",
             "vtkFiltering", "vtkFilteringJava", "vtkexpat", "vtkjpeg", "vtkzlib", "vtklibxml2", "vtktiff", "vtkpng",
             "vtksqlite", "vtkmetaio", "vtkNetCDF", "vtkDICOMParser", "vtkNetCDF_cxx", "vtkIO", "vtkIOJava",
             "vtkImaging", "vtkImagingJava", "vtkverdict", "vtkGraphics", "vtkGraphicsJava", "vtkfreetype", "vtkftgl",
@@ -80,7 +114,7 @@ public class Viewer3DNodeActivator implements BundleActivator {
             "vtkVolumeRendering", "vtkVolumeRenderingJava", "vtkWidgets", "vtkWidgetsJava", "vtkInfovis",
             "vtkInfovisJava"};
 
-    private static String[] windows = {"lwjgl", "msvcr100", "msvcp100", "vtkproj4", "vtkalglib", "vtksys", "vtkCommon",
+    private static String[] WINDOWS = {"lwjgl", "msvcr100", "msvcp100", "vtkproj4", "vtkalglib", "vtksys", "vtkCommon",
             "vtkCommonJava", "vtkFiltering", "vtkFilteringJava", "vtkexpat", "vtkjpeg", "vtkzlib", "vtkhdf5",
             "vtklibxml2", "vtktiff", "vtkpng", "vtkmetaio", "vtkNetCDF", "vtkDICOMParser", "vtkNetCDF_cxx", "vtkIO",
             "vtkIOJava", "vtkImaging", "vtkImagingJava", "vtkverdict", "vtkGraphics", "vtkGraphicsJava", "vtkfreetype",
@@ -88,7 +122,7 @@ public class Viewer3DNodeActivator implements BundleActivator {
             "vtkHybridJava", "vtkVolumeRendering", "vtkVolumeRenderingJava", "vtkWidgets", "vtkWidgetsJava",
             "vtkInfovis", "vtkInfovisJava"};
 
-    private static String[] osx = {"lwjgl", "vtkproj4", "vtkalglib", "vtksys", "vtkCommon", "vtkCommonJava",
+    private static String[] OSX = {"lwjgl", "vtkproj4", "vtkalglib", "vtksys", "vtkCommon", "vtkCommonJava",
             "vtkFiltering", "vtkFilteringJava", "vtkexpat", "vtkjpeg", "vtkzlib", "vtklibxml2", "vtktiff", "vtkpng",
             "vtksqlite", "vtkmetaio", "vtkNetCDF", "vtkDICOMParser", "vtkNetCDF_cxx", "vtkIO", "vtkIOJava",
             "vtkImaging", "vtkImagingJava", "vtkverdict", "vtkGraphics", "vtkGraphicsJava", "vtkfreetype", "vtkftgl",
@@ -96,79 +130,4 @@ public class Viewer3DNodeActivator implements BundleActivator {
             "vtkVolumeRendering", "vtkVolumeRenderingJava", "vtkWidgets", "vtkWidgetsJava", "vtkInfovis",
             "vtkInfovisJava"};
 
-    /**
-     * This method trys to load all libs that are passed to it.<br>
-     * 
-     * To ensure the libs are actually all loaded, the programmer has to make sure that the libs are in correct order.
-     * 
-     * @param libs the system specific libs to load
-     * 
-     * @throws UnsatisfiedLinkError if one or more libs could not be loaded at all
-     */
-    private void loadLibs(final String[] libs) {
-
-        if (libs != null) {
-            for (final String s : libs) {
-                System.loadLibrary(s);
-            }
-        }
-    }
-
-    /*
-     * Fixes bug where 3D Viewer is no longer available with java 7
-     * 
-     * For some reason under java7 liblwjgl.so is no longer able to load the libjawt.so
-     * by itself. This is supposed to be fixed in the nightly builds, however a quick test
-     * does not confirm that. The code below however does fix it.
-     * 
-     * Info: http://lwjgl.org/forum/index.php/topic,4085.0.html
-     */
-    private void preloadAWT() {
-        java.awt.Toolkit.getDefaultToolkit();
-        System.loadLibrary("jawt");
-
-    }
-
-    @Override
-    public final void start(final BundleContext context) throws Exception {
-
-        if (!GraphicsEnvironment.isHeadless()) {
-
-            preloadAWT();
-
-            LOGGER.debug("Trying to load vtk libs");
-
-            final String os = System.getProperty("os.name");
-
-            try {
-
-                if (os.contains("Windows")) {
-                    loadLibs(windows);
-                } else if (os.equals("Linux")) {
-                    loadLibs(linux);
-                } else if (os.equals("Mac OS X")) {
-                    loadLibs(osx);
-                } else {
-                    LOGGER.error("VTK not loaded, could not determine System: " + os);
-                }
-
-                LOGGER.debug("VTK successfully loaded");
-                VTKLoaded = true;
-
-            } catch (final UnsatisfiedLinkError error) {
-                LOGGER.error("Could not load VTK, the 3D Viewer will not be available!");
-                LOGGER.error(error.getMessage());
-            }
-
-        }
-    }
-
-    @Override
-    public final void stop(final BundleContext context) throws Exception {
-        // unused
-    }
-
-    public static final boolean VTKLoaded() {
-        return VTKLoaded;
-    }
 }
