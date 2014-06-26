@@ -2,9 +2,9 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: VTK 5.8.0 Libraries for Linux x86_64
 Bundle-SymbolicName: org.knime.knip.vtk.bin.linux.amd64
-Bundle-Version: 1.1.0.qualifier
-Fragment-Host: org.knime.knip.vtk.base;bundle-version="1.1.0"
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-Version: 1.1.1.qualifier
+Fragment-Host: org.knime.knip.vtk.base;bundle-version="1.1.1"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Eclipse-PlatformFilter: (&(osgi.os=linux)(osgi.arch=x86_64))
 Bundle-Vendor: University of Konstanz
 Bundle-NativeCode: lib/linux/amd64/libvtkalglib.so;

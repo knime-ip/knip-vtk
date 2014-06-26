@@ -2,10 +2,10 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: VTK 5.8.0 Libraries for Windows x86_64
 Bundle-SymbolicName: org.knime.knip.vtk.bin.windows.amd64
-Bundle-Version: 1.1.0.qualifier
+Bundle-Version: 1.1.1.qualifier
 Bundle-Vendor: University of Konstanz
-Fragment-Host: org.knime.knip.vtk.base;bundle-version="1.1.0"
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Fragment-Host: org.knime.knip.vtk.base;bundle-version="1.1.1"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Eclipse-PlatformFilter: (&(osgi.os=win32)(osgi.arch=x86_64))
 Bundle-NativeCode: 
  lib/windows/x86_64/msvcp100.dll;
