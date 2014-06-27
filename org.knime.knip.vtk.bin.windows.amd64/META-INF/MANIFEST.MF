@@ -55,4 +55,5 @@ Bundle-NativeCode:
  osname=Windows 8;
  osname=Windows8;
  osname=Win 8;
+ osname=Windows 8.1;
  processor=x86_64
