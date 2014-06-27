@@ -52,4 +52,8 @@ Bundle-NativeCode:
  lib/windows/x86/vtkzlib.dll;
  lib/windows/x86/lwjgl.dll;
  osname=win32;
+ sname=Windows 8;
+ osname=Windows 8.1;
+ osname=Windows8;
+ osname=Win 8;
  processor=x86
