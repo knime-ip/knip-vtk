@@ -52,8 +52,9 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 
-import net.imglib2.meta.CalibratedAxis;
-import net.imglib2.meta.ImgPlus;
+import net.imagej.ImgPlus;
+import net.imagej.axis.CalibratedAxis;
+import net.imagej.axis.TypedAxis;
 import net.imglib2.type.numeric.RealType;
 
 import org.knime.knip.core.ui.event.EventService;
@@ -63,14 +64,14 @@ import vtk.vtkImageData;
 
 /**
  * This class handles all administrative work to map between imglib2 images and vtkImages.<br>
- * 
+ *
  * Basically the method returns a Viewer3DNodeVolume that is associated with some dimensional settings. Moreover it uses
  * caching to allow for quick access if one is constantly swapping around the image to view.<br>
- * 
+ *
  * Note that the caching assumes that images are the same, independent of the actual ordering of the dimensions. So e.g.
  * an image with dimensions XYZ is considered to be the same as ZXY.
- * 
- * 
+ *
+ *
  * @author <a href="mailto:dietzc85@googlemail.com">Christian Dietz</a>
  * @author <a href="mailto:horn_martin@gmx.de">Martin Horn</a>
  * @author <a href="mailto:michael.zinsmaier@googlemail.com">Michael Zinsmaier</a>
@@ -94,13 +95,13 @@ public class Viewer3DNodeImageAdmin<T extends RealType<T>> {
 
     /**
      * Set up a new instance to manage one image.
-     * 
+     *
      * @param image the image to administrate
      * @param eventService the eventService to use
-     * 
+     *
      * @throws Viewer3DNodeNotEnoughDimsException if there are less than 3 dims
      * @throws IllegalArgumentException if {@code eventService == null}
-     * 
+     *
      * @see Viewer3DNodeImageToVTK#Viewer3DNodeImageToVTK
      */
     public Viewer3DNodeImageAdmin(final ImgPlus<T> image, final EventService eventService)
@@ -128,7 +129,7 @@ public class Viewer3DNodeImageAdmin<T extends RealType<T>> {
 
         final List<Viewer3DNodeAxis> axesList = new LinkedList<Viewer3DNodeAxis>();
 
-        for (final CalibratedAxis a : axes) {
+        for (final TypedAxis a : axes) {
             final long extent = image.dimension(image.dimensionIndex(a.type()));
             axesList.add(new Viewer3DNodeAxis(a, (int)extent, image.dimensionIndex(a.type())));
         }
@@ -138,7 +139,7 @@ public class Viewer3DNodeImageAdmin<T extends RealType<T>> {
 
     /**
      * Get the axes instance used by this admin.
-     * 
+     *
      * @return the axes
      */
     public final Viewer3DNodeAxes getAxes() {
@@ -147,7 +148,7 @@ public class Viewer3DNodeImageAdmin<T extends RealType<T>> {
 
     /**
      * Get the volume that corresponds to the given dimensions.
-     * 
+     *
      * @param volume the volume to get
      * @return the corresponding volume
      */
@@ -184,7 +185,7 @@ public class Viewer3DNodeImageAdmin<T extends RealType<T>> {
 
     /**
      * Get all currently displayed volumes as listed by the owned axes instance of this instance.
-     * 
+     *
      * @return a list of all volumes
      */
     public final List<Viewer3DNodeVolume> getVolumes() {
@@ -198,7 +199,7 @@ public class Viewer3DNodeImageAdmin<T extends RealType<T>> {
 
     /**
      * Set the mapper to use in the next volume.
-     * 
+     *
      * @param mapper the mapper to use
      */
     public final void setMapper(final Viewer3DNodeVolume.Mapper mapper) {
@@ -207,7 +208,7 @@ public class Viewer3DNodeImageAdmin<T extends RealType<T>> {
 
     /**
      * Sets whether or not this instance is caching.
-     * 
+     *
      * @param caching The caching.
      */
     public final void setCaching(final boolean caching) {
@@ -216,7 +217,7 @@ public class Viewer3DNodeImageAdmin<T extends RealType<T>> {
 
     /**
      * Gets the current volume for this instance.
-     * 
+     *
      * @return The current volume.
      */
     public final Viewer3DNodeVolume getCurrent() {
@@ -226,7 +227,7 @@ public class Viewer3DNodeImageAdmin<T extends RealType<T>> {
     /**
      * If this method is called, all images cached by this instance will be deleted by a call to the
      * vtkImageData.Delete() method.<br>
-     * 
+     *
      * This means that the memory of all images will be freed, regardless if one of the images is currently being
      * rendered!
      */

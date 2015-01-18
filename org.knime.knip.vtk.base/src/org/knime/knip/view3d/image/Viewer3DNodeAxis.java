@@ -51,11 +51,12 @@ package org.knime.knip.view3d.image;
 import java.util.Arrays;
 import java.util.Comparator;
 
-import net.imglib2.meta.TypedAxis;
+import net.imagej.axis.TypedAxis;
+
 
 /**
  * This class contains all info about one axis of an image.
- * 
+ *
  * @author <a href="mailto:dietzc85@googlemail.com">Christian Dietz</a>
  * @author <a href="mailto:horn_martin@gmx.de">Martin Horn</a>
  * @author <a href="mailto:michael.zinsmaier@googlemail.com">Michael Zinsmaier</a>
@@ -79,9 +80,9 @@ public class Viewer3DNodeAxis implements Comparable<Viewer3DNodeAxis> {
 
     /**
      * Get a Comparator that sorts Viewer3DNodeAxis objects by their index.<br>
-     * 
+     *
      * Note: this comparator imposes orderings that are inconsistent with equals
-     * 
+     *
      * @return a Comparator
      */
     public final Comparator<Viewer3DNodeAxis> getOrderByIndexComparator() {
@@ -100,7 +101,7 @@ public class Viewer3DNodeAxis implements Comparable<Viewer3DNodeAxis> {
 
     /**
      * Set up a new axis.
-     * 
+     *
      * @param label of this axis
      * @param extent in this dimnsion
      */
@@ -114,7 +115,7 @@ public class Viewer3DNodeAxis implements Comparable<Viewer3DNodeAxis> {
 
     /**
      * Create a deep copy of the given axis.
-     * 
+     *
      * @param axis the axis to copy
      */
     public Viewer3DNodeAxis(final Viewer3DNodeAxis axis) {
@@ -127,9 +128,9 @@ public class Viewer3DNodeAxis implements Comparable<Viewer3DNodeAxis> {
 
     /**
      * Set new dims that should be rendered.
-     * 
+     *
      * @param val all dims to be rendered, need not be sorted, but will be
-     * 
+     *
      * @throws IllegalArgumentException if one of the values is negative or one of the value is larger than the extent,
      *             i.e. i is not element of [0,extent - 1]
      */
@@ -170,9 +171,9 @@ public class Viewer3DNodeAxis implements Comparable<Viewer3DNodeAxis> {
 
     /**
      * Set which dimemension should be manipulatd by the Transfer Function Viewer.
-     * 
+     *
      * @param val the dim to be manipulated
-     * 
+     *
      * @throws IllegalArgumentException if val is not one of the currently displayed dimensions
      */
     public final void setManipulated(final int val) {
@@ -203,7 +204,7 @@ public class Viewer3DNodeAxis implements Comparable<Viewer3DNodeAxis> {
 
     /**
      * Get the currently manipulated dimension.
-     * 
+     *
      * @return manipulated dim
      */
     public final int getManipulated() {
@@ -212,7 +213,7 @@ public class Viewer3DNodeAxis implements Comparable<Viewer3DNodeAxis> {
 
     /**
      * Get the currently displayed dimensions.
-     * 
+     *
      * @return displayed
      */
     public final int[] getDisplayed() {
@@ -221,7 +222,7 @@ public class Viewer3DNodeAxis implements Comparable<Viewer3DNodeAxis> {
 
     /**
      * Get the currently displayed dimensions as an array of strings.
-     * 
+     *
      * @return displayed
      */
     public final String[] getDisplayedAsString() {
@@ -236,7 +237,7 @@ public class Viewer3DNodeAxis implements Comparable<Viewer3DNodeAxis> {
 
     /**
      * Get the extent of this axis.
-     * 
+     *
      * @return extent
      */
     public final int getExtent() {
@@ -245,7 +246,7 @@ public class Viewer3DNodeAxis implements Comparable<Viewer3DNodeAxis> {
 
     /**
      * Get the label of this axis.
-     * 
+     *
      * @return label
      */
     public final String getLabel() {
@@ -254,7 +255,7 @@ public class Viewer3DNodeAxis implements Comparable<Viewer3DNodeAxis> {
 
     /**
      * Get the axis of this axis.
-     * 
+     *
      * @return axis
      */
     public final TypedAxis getAxis() {
@@ -263,7 +264,7 @@ public class Viewer3DNodeAxis implements Comparable<Viewer3DNodeAxis> {
 
     /**
      * This only tests if the labels of the axis are the same, not if this might be a deep copy that has been changed!<br>
-     * 
+     *
      * @see java.lang.Comparable#compareTo(java.lang.Object)
      */
     @Override
@@ -273,7 +274,7 @@ public class Viewer3DNodeAxis implements Comparable<Viewer3DNodeAxis> {
 
     /**
      * Get the index of this axis.<br>
-     * 
+     *
      * @return the index
      */
     public int getIndex() {
